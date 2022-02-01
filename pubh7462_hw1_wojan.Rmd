@@ -1,0 +1,122 @@
+---
+title: "PUBH 7462 Homework 1"
+author: "Chris Wojan"
+date: "2/1/2022"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+
+## (Setup code modified from template provided)
+
+## Load packages
+library(tidyverse)
+
+## Working directory for .RMD
+knitr::opts_knit$set(echo = TRUE,
+                     root.dir = rprojroot::find_rstudio_root_file())
+
+## Controlling figure output in markdown
+knitr::opts_chunk$set(
+#  fig.height =   
+  fig.width = 6,
+#  fig.asp = .5,
+  out.width = "90%",
+#  out.height = 
+ fig.align = "center",
+  cache = FALSE,
+  echo  = TRUE
+)
+
+## Set Theme for ggplot2 - centers title and legend at bottom by default
+theme_set(theme_bw() + 
+          theme(plot.title = element_text(hjust = 0.5), legend.position = "bottom"))
+
+## Set Scientific notation output and decimal places for knitr
+options(scipen = 999)
+options(digits = 4)
+
+```
+
+### Problem 2.1
+#### Independent Bivariate Normal Random Sample
+
+```{r prob_2.1, echo = TRUE, warning = TRUE, error = TRUE, message = TRUE, results = TRUE, include = TRUE}
+
+## Create a tibble including random samples from two normal distributions
+## and an indicator for the sum of each row
+sample_data <- tibble(x = rnorm(n = 1000, mean = 0, sd = 1),
+                      y = rnorm(n = 1000, mean = 1, sd = sqrt(2)),
+                      sum_indicator = ifelse(x + y > 0.5, "Yes", "No"))
+
+## Factorize the indicator variable
+sample_data <- mutate(sample_data, 
+                      sum_indicator = factor(sum_indicator, levels = c("Yes","No")))
+
+## Plot the sample data
+ggplot(data = sample_data) + 
+  geom_point(aes(x = x, y = y, color = sum_indicator)) +
+  scale_color_brewer(palette = "Pastel1",
+                     guide = guide_legend(title = "X + Y > 0.5?")) + 
+  labs(title = "Random Samples from Two Normal Distributions",
+       x = "X ~ N(0,1)",
+       y = "Y ~ N(1,2)")
+
+```
+
+### Problem 2.2
+#### Penguin EDA
+
+```{r prob_2.2_data, echo = TRUE, warning = TRUE, error = TRUE, message = TRUE, results = TRUE, include = TRUE}
+
+## Read data with relative path
+penguin.df <- read_rds("./data/penguin.RDS")
+
+```
+
+##### Data Description
+In the "penguin.df" data, each row represents an observation of an individual penguin.
+The data set includes `r nrow(penguin.df)` penguin observations and `r ncol(penguin.df)` recorded variables for each.  
+
+Column                   | Description  
+------------------------- | ------------------------------------------  
+`r names(penguin.df)[1]` | Species of penguin  
+`r names(penguin.df)[2]` | Island location of penguin  
+`r names(penguin.df)[3]` | Length of penguin's bill in millimeters  
+`r names(penguin.df)[4]` | Depth of penguin's bill in millimeters  
+`r names(penguin.df)[5]` | Length of penguin's flipper in millimeter  
+`r names(penguin.df)[6]` | Mass of penguin in grams  
+`r names(penguin.df)[7]` | Sex of penguin  
+`r names(penguin.df)[8]` | Year of observation  
+
+The mean flipper length is `r mean(penguin.df$flipper_length_mm, na.rm = TRUE)` with a standard deviation of `r sd(penguin.df$flipper_length_mm, na.rm = TRUE)`.  
+The mean bill length is `r mean(penguin.df$bill_length_mm, na.rm = TRUE)` with a standard deviation of `r sd(penguin.df$bill_length_mm, na.rm = TRUE)`.  
+
+##### Data Visualization
+
+```{r prob_2_vis, echo = TRUE, warning = FALSE, error = TRUE, message = FALSE, results = TRUE, include = TRUE}
+
+penguin.df <- mutate(penguin.df,
+                     sex = fct_explicit_na(sex, na_level = "Unrecorded"),
+                     sex = fct_recode(sex, Female = "female", Male = "male"))
+
+flip_bill_plot <-
+  ggplot(data = penguin.df) + 
+  geom_point(aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + 
+  scale_color_brewer(palette = "Pastel1",
+                     guide = guide_legend(title = "Species")) + 
+  labs(title = "Relationship of Penguin Flipper Length and Bill Length, by Species",
+       x = "Length of Bill (mm)",
+       y = "Length of Flipper (mm)")
+
+flip_bill_plot
+
+flip_bill_plot +
+  facet_wrap(vars(sex)) +
+  labs(title = "Relationship of Penguin Flipper Length and Bill Length, by Species and Sex")
+
+```
+
+**Trends**  
+Bill length and flipper length appear to be positively correlated. Gentoo penguins tend to have longer flippers than Adelie and Chinstrap penguins. Chinstrap penguins tend to have longer bills than Adelie penguins. Males seem to have longer bills and flippers than females.
+
