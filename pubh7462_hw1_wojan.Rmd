@@ -84,7 +84,7 @@ Column                   | Description
 `r names(penguin.df)[2]` | Island location of penguin  
 `r names(penguin.df)[3]` | Length of penguin's bill in millimeters  
 `r names(penguin.df)[4]` | Depth of penguin's bill in millimeters  
-`r names(penguin.df)[5]` | Length of penguin's flipper in millimeter  
+`r names(penguin.df)[5]` | Length of penguin's flipper in millimeters  
 `r names(penguin.df)[6]` | Mass of penguin in grams  
 `r names(penguin.df)[7]` | Sex of penguin  
 `r names(penguin.df)[8]` | Year of observation  
@@ -118,5 +118,5 @@ flip_bill_plot +
 ```
 
 **Trends**  
-Bill length and flipper length appear to be positively correlated. Gentoo penguins tend to have longer flippers than Adelie and Chinstrap penguins. Chinstrap penguins tend to have longer bills than Adelie penguins. Males seem to have longer bills and flippers than females.
+Bill length and flipper length appear to be positively correlated. Gentoo penguins tend to have longer flippers than Adelie and chinstrap penguins. Chinstrap penguins tend to have longer bills than Adelie penguins. Males seem to have longer bills and flippers than females.
 

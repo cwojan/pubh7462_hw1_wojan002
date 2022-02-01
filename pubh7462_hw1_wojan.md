@@ -45,16 +45,16 @@ In the “penguin.df” data, each row represents an observation of an
 individual penguin. The data set includes 344 penguin observations and 8
 recorded variables for each.
 
-| Column            | Description                               |
-|-------------------|-------------------------------------------|
-| species           | Species of penguin                        |
-| island            | Island location of penguin                |
-| bill_length_mm    | Length of penguin’s bill in millimeters   |
-| bill_depth_mm     | Depth of penguin’s bill in millimeters    |
-| flipper_length_mm | Length of penguin’s flipper in millimeter |
-| body_mass_g       | Mass of penguin in grams                  |
-| sex               | Sex of penguin                            |
-| year              | Year of observation                       |
+| Column            | Description                                |
+|-------------------|--------------------------------------------|
+| species           | Species of penguin                         |
+| island            | Island location of penguin                 |
+| bill_length_mm    | Length of penguin’s bill in millimeters    |
+| bill_depth_mm     | Depth of penguin’s bill in millimeters     |
+| flipper_length_mm | Length of penguin’s flipper in millimeters |
+| body_mass_g       | Mass of penguin in grams                   |
+| sex               | Sex of penguin                             |
+| year              | Year of observation                        |
 
 The mean flipper length is 200.9152 with a standard deviation of
 14.0617.  
@@ -91,6 +91,6 @@ flip_bill_plot +
 
 **Trends**  
 Bill length and flipper length appear to be positively correlated.
-Gentoo penguins tend to have longer flippers than Adelie and Chinstrap
+Gentoo penguins tend to have longer flippers than Adelie and chinstrap
 penguins. Chinstrap penguins tend to have longer bills than Adelie
 penguins. Males seem to have longer bills and flippers than females.
