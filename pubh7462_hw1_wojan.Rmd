@@ -96,10 +96,12 @@ The mean bill length is `r mean(penguin.df$bill_length_mm, na.rm = TRUE)` with a
 
 ```{r prob_2_vis, echo = TRUE, warning = FALSE, error = TRUE, message = FALSE, results = TRUE, include = TRUE}
 
+## Relabel the sex factor for better plot aesthetics
 penguin.df <- mutate(penguin.df,
                      sex = fct_explicit_na(sex, na_level = "Unrecorded"),
                      sex = fct_recode(sex, Female = "female", Male = "male"))
 
+## Save plot of flipper length by bill length by species
 flip_bill_plot <-
   ggplot(data = penguin.df) + 
   geom_point(aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + 
@@ -109,8 +111,10 @@ flip_bill_plot <-
        x = "Length of Bill (mm)",
        y = "Length of Flipper (mm)")
 
+## Draw above plot
 flip_bill_plot
 
+## Draw a new plot now facetting by sex
 flip_bill_plot +
   facet_wrap(vars(sex)) +
   labs(title = "Relationship of Penguin Flipper Length and Bill Length, by Species and Sex")

@@ -63,10 +63,12 @@ The mean bill length is 43.9219 with a standard deviation of 5.4596.
 ##### Data Visualization
 
 ``` r
+## Relabel the sex factor for better plot aesthetics
 penguin.df <- mutate(penguin.df,
                      sex = fct_explicit_na(sex, na_level = "Unrecorded"),
                      sex = fct_recode(sex, Female = "female", Male = "male"))
 
+## Save plot of flipper length by bill length by species
 flip_bill_plot <-
   ggplot(data = penguin.df) + 
   geom_point(aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + 
@@ -76,12 +78,14 @@ flip_bill_plot <-
        x = "Length of Bill (mm)",
        y = "Length of Flipper (mm)")
 
+## Draw above plot
 flip_bill_plot
 ```
 
 <img src="pubh7462_hw1_wojan_files/figure-gfm/prob_2_vis-1.png" width="90%" style="display: block; margin: auto;" />
 
 ``` r
+## Draw a new plot now facetting by sex
 flip_bill_plot +
   facet_wrap(vars(sex)) +
   labs(title = "Relationship of Penguin Flipper Length and Bill Length, by Species and Sex")
