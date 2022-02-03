@@ -74,7 +74,7 @@ flip_bill_plot <-
   geom_point(aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + 
   scale_color_brewer(palette = "Pastel1",
                      guide = guide_legend(title = "Species")) + 
-  labs(title = "Relationship of Penguin Flipper Length and Bill Length, by Species",
+  labs(title = "Penguin Flipper Length and Bill Length, by Species",
        x = "Length of Bill (mm)",
        y = "Length of Flipper (mm)")
 
@@ -88,7 +88,7 @@ flip_bill_plot
 ## Draw a new plot now facetting by sex
 flip_bill_plot +
   facet_wrap(vars(sex)) +
-  labs(title = "Relationship of Penguin Flipper Length and Bill Length, by Species and Sex")
+  labs(title = "Penguin Flipper Length and Bill Length, by Species/Sex")
 ```
 
 <img src="pubh7462_hw1_wojan_files/figure-gfm/prob_2_vis-2.png" width="90%" style="display: block; margin: auto;" />
